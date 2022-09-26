@@ -1,0 +1,132 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  /* change everything to being border-box - makes sizing things easier*/
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  /* to remove the scroll bar, beacuse it prevents the page to be scrollable */
+}
+
+.clock {
+  width: 300px;
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.8);
+  /* white with 80% transparency */
+  border-radius: 50%;
+  /* rounds all the corners */
+  border: 2px solid black;
+  position: relative;
+  /* make it relative so that numbers can get an absolute position to the clock */
+}
+
+.clock .number {
+  --rotation: 0;
+  /* we set the initial value of the variable rotation to 0, so that the first item starts from that place */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  /* we put it in the center, so that the element aligns to the center of the square I created */
+  transform: rotate(var(--rotation));
+  /* we use a variable, so that we can target every number and make it rotate */
+  font-size: 1.5rem;
+}
+
+.clock .number1 {
+  --rotation: 30deg;
+}
+.clock .number2 {
+  --rotation: 60deg;
+}
+.clock .number3 {
+  --rotation: 90deg;
+}
+.clock .number4 {
+  --rotation: 120deg;
+}
+.clock .number5 {
+  --rotation: 150deg;
+}
+.clock .number6 {
+  --rotation: 180deg;
+}
+.clock .number7 {
+  --rotation: 210deg;
+}
+.clock .number8 {
+  --rotation: 240deg;
+}
+.clock .number9 {
+  --rotation: 270deg;
+}
+.clock .number10 {
+  --rotation: 300deg;
+}
+.clock .number11 {
+  --rotation: 330deg;
+}
+/* number 12 is already defaulted to 360deg */
+
+.clock .hand {
+  --rotation: 0;
+  position: absolute;
+  bottom: 50%;
+  /* to put the hands in the center of the clock, we set the bottom of the element to 50% */
+  left: 50%;
+  border: 1px solid white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /* we style the borderss of the hand */
+  transform-origin: bottom;
+  /* allows you to say where this transormation will be applied to */
+  z-index: 10;
+  /* to always get the hand on top of the numbers */
+  transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
+  /* translates the element 50% backwards, so that it is aligned...
+    it wasn't aligned because of its width */
+  /* to convert the value of the variable to degrees */
+}
+
+.clock .hand.second {
+  width: 3px;
+  height: 45%;
+  background-color: red;
+}
+
+.clock .hand.minute {
+  width: 7px;
+  height: 40%;
+  background-color: black;
+}
+
+.clock .hand.hour {
+  width: 10px;
+  height: 35%;
+  background-color: black;
+}
+
+/* adding a circle in the middle of the clock */
+/* it's a pseudo-element */
+.clock::after {
+  content: "";
+  /* adding a new content to the DOM, we set it to an empty string */
+  position: absolute;
+  background-color: black;
+  z-index: 11;
+  /* adding it on top of the other elements */
+  width: 15px;
+  height: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* translate the element 50% in both directions */
+  border-radius: 50%;
+}
